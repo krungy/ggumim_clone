@@ -6,6 +6,7 @@ const Image = ({ src, alt, block, width, height, radius, ...props }) => {
     height,
     display: block && 'block',
     borderRadius: radius && radius,
+    WebkitUserDrag: 'none',
   };
 
   return (
