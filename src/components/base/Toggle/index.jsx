@@ -1,32 +1,28 @@
 import styled from '@emotion/styled';
-import useToggle from '@hooks/useToggle';
 import { Image } from '@components/base';
 import search from '@assets/image/search.png';
 import close from '@assets/image/close.png';
 import PropTypes from 'prop-types';
 
-const Toggle = ({ name, on, disabled, onChange, ...props }) => {
-  const [checked, toggle] = useToggle(on);
-
+const Toggle = ({ name, id, on, disabled, onClick, ...props }) => {
   const handleChange = (e) => {
-    toggle();
-    onChange && onChange(e);
+    onClick && onClick(e);
   };
 
   return (
-    <ToggleContainer {...props}>
+    <ToggleContainer>
       <ToggleInput
         type="checkbox"
         name={name}
-        checked={checked}
+        checked={on}
         disabled={disabled}
         onChange={handleChange}
       />
       <ToggleSwitch {...props} style={{ ...props.style }}>
-        {checked ? (
+        {on ? (
           <Image alt="close" src={close} width={32} height={32} />
         ) : (
-          <Image alt="search" src={search} width={32} height={32} />
+          <Image alt="open" data-id={id} src={search} width={32} height={32} />
         )}
       </ToggleSwitch>
     </ToggleContainer>
@@ -35,12 +31,14 @@ const Toggle = ({ name, on, disabled, onChange, ...props }) => {
 
 Toggle.propTypes = {
   name: PropTypes.string.isRequired,
+  id: PropTypes.number,
   on: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: () => {},
 };
 
 Toggle.defaultProps = {
+  id: null,
   on: false,
   disabled: false,
   onChange: () => {},
