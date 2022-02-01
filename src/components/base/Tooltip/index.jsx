@@ -3,16 +3,20 @@ import pointImage from '@assets/image/tooltip.png';
 import { Image } from '@components/base';
 import next from '@assets/image/next.png';
 import PropTypes from 'prop-types';
+import useToggle from '@hooks/useToggle';
 
 const Tooltip = ({
   position,
   src,
   title,
+  outside,
   discount,
   price,
-  visible,
+  on,
   ...props
 }) => {
+  const [checked, toggle] = useToggle(on);
+
   const discountStyle = {
     color: '#ff585d',
   };
@@ -23,22 +27,28 @@ const Tooltip = ({
   };
 
   return (
-    <TooltipContainer position={position} visible={visible} {...props}>
+    <TooltipContainer
+      position={position}
+      visible={checked}
+      onClick={() => toggle()}
+      {...props}
+    >
       <ContentContainer>
         <Image src={src} width="70px" height="70px" radius="4px" />
         <InfoContainer>
           <Title>{title}</Title>
           <PriceInfo>
-            {discount ? (
-              <span style={{ ...discountStyle }}>{discount}</span>
-            ) : (
+            {outside ? (
               <span style={{ ...stocklessStyle }}>예상가</span>
+            ) : (
+              <span style={{ ...discountStyle }}>{discount}</span>
             )}
             {price}
           </PriceInfo>
         </InfoContainer>
         <Image
           src={next}
+          alt={title}
           width={20}
           height={20}
           style={{ marginTop: 50 }}
@@ -52,6 +62,7 @@ Tooltip.propTypes = {
   position: PropTypes.oneOf(['top', 'bottom']),
   src: PropTypes.string,
   title: PropTypes.string,
+  outside: PropTypes.bool,
   discount: PropTypes.string,
   price: PropTypes.string,
   visible: PropTypes.bool,
@@ -61,8 +72,9 @@ Tooltip.defaultProps = {
   position: 'bottom',
   src: '',
   title: 'title',
-  discount: '',
-  price: 'price',
+  outside: false,
+  discount: '0',
+  price: '0',
   visible: true,
 };
 
@@ -79,6 +91,8 @@ const TooltipContainer = styled.div`
   background-color: #fff;
   cursor: pointer;
   box-sizing: border-box;
+  left: -85px;
+  top: ${({ position }) => (position === 'bottom' ? '38px' : '-94px')};
 
   &::before {
     content: '';
