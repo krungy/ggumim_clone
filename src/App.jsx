@@ -1,47 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Global } from '@emotion/core';
 import ResetStyle from '@styles/ResetStyle';
-import api from '@api/api';
 import styled from '@emotion/styled';
 import { Image } from '@components/base';
 import { ToggleTooltip } from '@components/domain';
+import { useSelects } from '@context/SelectProvider';
 
 const App = () => {
-  const [productList, setProductList] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const getapi = async () => {
-      setIsLoading(true);
-      try {
-        const { data } = await api();
-        setProductList(data);
-        setIsLoading(false);
-      } catch (e) {
-        console.log(e.response);
+  const {
+    productList,
+    isLoading,
+    selectedProduct,
+    selectProduct,
+    removeProduct,
+  } = useSelects();
+
+  const handleOnClick = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (selectProduct) {
+        !e.target.dataset.id && removeProduct();
+        e.target.dataset.id !== selectProduct &&
+          selectProduct(e.target.dataset.id);
       }
-    };
-    getapi();
-  }, []);
+    },
+    [selectProduct, removeProduct],
+  );
+
+  const handleClickToggle = (e) => {
+    e.preventDefault();
+    selectProduct(e.target.dataset.id);
+  };
 
   const handleToggleTooltipList = (list) =>
     list.map((info, index) => (
       <ToggleTooltip
         info={info}
         key={index}
-        onClick={() => setSelectedProduct(info.productId)}
-        visible={info.productId === selectedProduct}
+        onClick={(e) => handleClickToggle(e)}
+        on={info.productId === Number(selectedProduct)}
       />
     ));
 
   return (
     <>
       <Global styles={ResetStyle} />
-      {isLoading ? (
-        <div>로딩중</div>
-      ) : (
+      {!isLoading && (
         <Container>
-          <MainImageContainer>
+          <MainImageContainer onClick={(e) => handleOnClick(e)}>
             <Image
               width="100%"
               height="100%"

@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SelectProvider from '@context/SelectProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SelectProvider>
+      <App />
+    </SelectProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
