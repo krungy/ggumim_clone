@@ -33,6 +33,19 @@ const Toggle = ({ name, on, disabled, onChange, ...props }) => {
   );
 };
 
+Toggle.propTypes = {
+  name: PropTypes.string.isRequired,
+  on: PropTypes.bool,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+Toggle.defaultProps = {
+  on: false,
+  disabled: false,
+  onChange: () => {},
+};
+
 const ToggleContainer = styled.label`
   display: inline-block;
   cursor: pointer;
@@ -54,18 +67,5 @@ const ToggleSwitch = styled.div`
 const ToggleInput = styled.input`
   display: none;
 `;
-
-Toggle.propTypes = {
-  name: PropTypes.string.isRequired,
-  on: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-Toggle.defaultProps = {
-  on: false,
-  disabled: false,
-  onChange: () => {},
-};
 
 export default Toggle;
