@@ -19,8 +19,6 @@ const Image = ({ src, alt, block, width, height, ...props }) => {
   );
 };
 
-export default Image;
-
 Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
@@ -34,3 +32,5 @@ Image.defaultProps = {
   width: '100%',
   height: '100%',
 };
+
+export default Image;
