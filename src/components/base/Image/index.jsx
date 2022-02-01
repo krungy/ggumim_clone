@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
 const Image = ({ src, alt, block, width, height, radius, ...props }) => {
-  // image style 설정 가로,세로,모드,블록 설정 완료
-
   const imageStyle = {
     width,
     height,
@@ -22,7 +20,7 @@ const Image = ({ src, alt, block, width, height, radius, ...props }) => {
 
 Image.propTypes = {
   src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  alt: PropTypes.string,
   block: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -30,6 +28,7 @@ Image.propTypes = {
 };
 
 Image.defaultProps = {
+  alt: 'image',
   block: true,
   width: '100%',
   height: '100%',
