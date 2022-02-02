@@ -3,7 +3,7 @@ import { Global } from '@emotion/core';
 import ResetStyle from '@styles/ResetStyle';
 import styled from '@emotion/styled';
 import { Image } from '@components/base';
-import { ToggleTooltip } from '@components/domain';
+import { ToggleTooltip, Carousel } from '@components/domain';
 import { useSelects } from '@context/SelectProvider';
 
 const App = () => {
@@ -18,13 +18,14 @@ const App = () => {
   const handleOnClick = useCallback(
     (e) => {
       e.preventDefault();
-      if (selectProduct) {
-        !e.target.dataset.id && removeProduct();
-        e.target.dataset.id !== selectProduct &&
-          selectProduct(e.target.dataset.id);
+      if (!e.target.dataset.id || e.target.tagName === 'SPAN') {
+        removeProduct();
+      }
+      if (selectedProduct && e.target.dataset.id !== selectedProduct) {
+        selectProduct(e.target.dataset.id);
       }
     },
-    [selectProduct, removeProduct],
+    [selectedProduct, selectProduct, removeProduct],
   );
 
   const handleClickToggle = (e) => {
@@ -56,6 +57,10 @@ const App = () => {
             />
             {handleToggleTooltipList(productList.productList)}
           </MainImageContainer>
+          {/* <Carousel
+            contentList={productList.productList}
+            style={{ margin: '24px 12px' }}
+          /> */}
         </Container>
       )}
     </>
@@ -65,6 +70,8 @@ const App = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  width: 800px;
 `;
 
 const MainImageContainer = styled.div`

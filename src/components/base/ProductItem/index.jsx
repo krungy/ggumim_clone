@@ -3,7 +3,7 @@ import { Image } from '@components/base';
 import discountBadge from '@assets/image/discountBadge.png';
 import { PropTypes } from 'prop-types';
 
-const ProductItem = ({ src, on, discount, size, ...props }) => {
+const ProductItem = ({ src, productId, on, discount, size, ...props }) => {
   const itemStyle = {
     width: size,
     height: size,
@@ -21,6 +21,7 @@ const ProductItem = ({ src, on, discount, size, ...props }) => {
   return (
     <ProductItemContainer
       selected={on}
+      data-id={productId}
       style={{ ...itemStyle, ...props.style }}
       {...props}
     >
@@ -34,6 +35,7 @@ const ProductItem = ({ src, on, discount, size, ...props }) => {
 
 ProductItem.propTypes = {
   src: PropTypes.string,
+  productId: PropTypes.number,
   on: PropTypes.bool,
   discount: PropTypes.number,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -41,6 +43,7 @@ ProductItem.propTypes = {
 
 ProductItem.defaultProps = {
   src: '',
+  productId: 0,
   on: false,
   discount: 0,
   size: 110,
@@ -54,6 +57,8 @@ const ProductItemContainer = styled.div`
   padding: 2px;
   box-sizing: border-box;
   border-radius: 18px;
+  cursor: pointer;
+  user-select: none;
   > div {
     border: ${({ selected }) => selected && '0.5px solid white'};
   }
@@ -65,14 +70,14 @@ const ImageContainer = styled.div`
   height: 106px;
   border: 0.5px solid #aaafb9;
   border-radius: 16px;
-  user-select: none;
-  cursor: pointer;
   overflow: hidden;
   box-sizing: border-box;
+  pointer-events: none;
 `;
 
 const BadgeContainer = styled.div`
   position: absolute;
+  pointer-events: none;
   width: 24px;
   height: 28px;
   top: 0;

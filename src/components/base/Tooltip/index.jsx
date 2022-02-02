@@ -113,12 +113,11 @@ const TooltipContainer = styled.span`
 `;
 
 const ContentContainer = styled.span`
-  pointer-events: none;
   display: flex;
+  pointer-events: none;
 `;
 
 const InfoContainer = styled.span`
-  pointer-events: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -126,7 +125,6 @@ const InfoContainer = styled.span`
 `;
 
 const Title = styled.span`
-  pointer-events: none;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -139,7 +137,6 @@ const Title = styled.span`
 `;
 
 const PriceInfo = styled.span`
-  pointer-events: none;
   line-height: '1.2em';
   font-size: 16px;
   font-weight: 700;
