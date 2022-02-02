@@ -4,7 +4,11 @@ import discountBadge from '@assets/image/discountBadge.png';
 import { PropTypes } from 'prop-types';
 
 const ProductItem = ({ src, productId, on, discount, size, ...props }) => {
-  const itemStyle = {
+  const imageStyle = {
+    width: size - 4,
+    height: size - 4,
+  };
+  const containerStyle = {
     width: size,
     height: size,
   };
@@ -22,11 +26,11 @@ const ProductItem = ({ src, productId, on, discount, size, ...props }) => {
     <ProductItemContainer
       selected={on}
       data-id={productId}
-      style={{ ...itemStyle, ...props.style }}
+      style={{ ...containerStyle, ...props.style }}
       {...props}
     >
-      <ImageContainer>
-        <Image src={src} alt="productImage" />
+      <ImageContainer style={{ ...imageStyle, ...props.style }}>
+        <Image src={src} alt="productImage" width={size} height={size} />
         {discount !== 0 && handleDiscount()}
       </ImageContainer>
     </ProductItemContainer>
@@ -54,6 +58,9 @@ const ProductItemContainer = styled.div`
     selected
       ? `linear-gradient(163.54deg, #ff659e 8.22%, #f56b30 94.1%)`
       : '#fff'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 2px;
   box-sizing: border-box;
   border-radius: 18px;
@@ -66,8 +73,6 @@ const ProductItemContainer = styled.div`
 
 const ImageContainer = styled.div`
   position: relative;
-  width: 106px;
-  height: 106px;
   border: 0.5px solid #aaafb9;
   border-radius: 16px;
   overflow: hidden;
