@@ -60,32 +60,47 @@ const App = () => {
     <>
       <Global styles={ResetStyle} />
       {!isLoading && (
-        <Container width={initialSize.width}>
-          <MainImageContainer
-            onClick={(e) => handleOnClick(e)}
-            width={initialSize.width}
-            height={initialSize.height}
-          >
-            <Image
-              width="100%"
-              height="100%"
-              alt="mainImage"
-              src={productList.imageUrl}
+        <ContainerStyledWrapper
+          width={initialSize.width}
+          height={initialSize.height}
+        >
+          <Container width={initialSize.width}>
+            <MainImageContainer
+              onClick={(e) => handleOnClick(e)}
+              width={initialSize.width}
+              height={initialSize.height}
+            >
+              <Image
+                width="100%"
+                height="100%"
+                alt="mainImage"
+                src={productList.imageUrl}
+              />
+              {handleToggleTooltipList(productList.productList)}
+            </MainImageContainer>
+            <Carousel
+              contentList={productList.productList}
+              contentWidth={110}
+              height={162}
+              gap={12}
+              style={{ marginTop: 24 }}
             />
-            {handleToggleTooltipList(productList.productList)}
-          </MainImageContainer>
-          <Carousel
-            contentList={productList.productList}
-            contentWidth={110}
-            height={162}
-            gap={12}
-            style={{ margin: '24px 0' }}
-          />
-        </Container>
+          </Container>
+        </ContainerStyledWrapper>
       )}
     </>
   );
 };
+
+const ContainerStyledWrapper = styled.div`
+  border: 1px solid;
+  width: ${({ width }) => width + 32}px;
+  padding: 16px 0;
+  box-shadow: rgb(0 0 0 / 30%) 0px 12px 40px -12px;
+  border-radius: 12px;
+  border: none;
+  margin: 32px auto;
+`;
 
 const Container = styled.div`
   display: flex;
