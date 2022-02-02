@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 
-const Image = ({ src, alt, block, width, height, radius, ...props }) => {
+const Image = ({ src, alt, block, width, height, radius, mode, ...props }) => {
   const imageStyle = {
     width,
     height,
     display: block && 'block',
     borderRadius: radius && radius,
     WebkitUserDrag: 'none',
+    objectFit: mode ?? 'cover', // cover, none, contain, fill
   };
 
   return (
@@ -26,6 +27,7 @@ Image.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   radius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  mode: PropTypes.oneOf(['cover', 'none', 'contain', 'fill']),
 };
 
 Image.defaultProps = {
@@ -34,6 +36,7 @@ Image.defaultProps = {
   width: '100%',
   height: '100%',
   radius: '0',
+  mode: 'cover',
 };
 
 export default Image;
