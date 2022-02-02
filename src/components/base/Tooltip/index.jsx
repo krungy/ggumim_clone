@@ -5,7 +5,8 @@ import next from '@assets/image/next.png';
 import PropTypes from 'prop-types';
 
 const Tooltip = ({
-  position,
+  xPosition,
+  yPosition,
   id,
   src,
   title,
@@ -25,7 +26,13 @@ const Tooltip = ({
   };
 
   return (
-    <TooltipContainer data-id={id} position={position} visible={on} {...props}>
+    <TooltipContainer
+      data-id={id}
+      xPosition={xPosition}
+      yPosition={yPosition}
+      visible={on}
+      {...props}
+    >
       <ContentContainer>
         <Image src={src} width="70px" height="70px" radius="4px" />
         <InfoContainer>
@@ -52,7 +59,7 @@ const Tooltip = ({
 };
 
 Tooltip.propTypes = {
-  position: PropTypes.oneOf(['top', 'bottom']),
+  yPosition: PropTypes.oneOf(['top', 'bottom']),
   id: PropTypes.number,
   src: PropTypes.string,
   title: PropTypes.string,
@@ -63,7 +70,7 @@ Tooltip.propTypes = {
 };
 
 Tooltip.defaultProps = {
-  position: 'bottom',
+  yPposition: 'bottom',
   id: null,
   src: '',
   title: 'title',
@@ -86,16 +93,16 @@ const TooltipContainer = styled.span`
   background-color: #fff;
   cursor: pointer;
   box-sizing: border-box;
-  left: -85px;
-  top: ${({ position }) => (position === 'bottom' ? '38px' : '-96px')};
+  left: ${({ xPosition }) => (xPosition === 'rightEnd' ? '-160px' : '-30px')};
+  top: ${({ yPosition }) => (yPosition === 'bottom' ? '38px' : '-96px')};
 
   &::before {
     content: '';
     position: absolute;
-    top: ${({ position }) => (position === 'bottom' ? '-8px' : 'unset')};
-    left: 95px;
+    top: ${({ yPosition }) => (yPosition === 'bottom' ? '-8px' : 'unset')};
+    left: ${({ xPosition }) => (xPosition === 'rightEnd' ? '170px' : '40px')};
     bottom: -8px;
-    transform: ${({ position }) => position === 'top' && `rotate(180deg)`};
+    transform: ${({ yPosition }) => yPosition === 'top' && `rotate(180deg)`};
     width: 12px;
     height: 8px;
     background-image: url(${pointImage});

@@ -5,7 +5,8 @@ const ToggleTooltip = ({ info, on, ...props }) => {
   const convertPosition = {
     x: info.pointX * 1.6,
     y: info.pointY * 1.65,
-    position: (info.pointX * 1.6) / 998 >= 0.5 ? 'top' : 'bottom',
+    yPosition: (info.pointX * 1.6) / 998 >= 0.5 ? 'top' : 'bottom',
+    xPosition: info.pointY > 250 ? 'rightEnd' : 'leftEnd',
   };
 
   return (
@@ -16,7 +17,8 @@ const ToggleTooltip = ({ info, on, ...props }) => {
     >
       <Toggle id={info.productId} name={info.productName} on={on} />
       <Tooltip
-        position={convertPosition.position}
+        xPosition={convertPosition.xPosition}
+        yPosition={convertPosition.yPosition}
         id={info.productId}
         src={info.imageUrl}
         title={info.productName}
