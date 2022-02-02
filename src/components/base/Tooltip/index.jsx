@@ -5,8 +5,8 @@ import next from '@assets/image/next.png';
 import PropTypes from 'prop-types';
 
 const Tooltip = ({
-  xPosition,
-  yPosition,
+  horizontalPosition,
+  verticalPosition,
   id,
   src,
   title,
@@ -28,8 +28,8 @@ const Tooltip = ({
   return (
     <TooltipContainer
       data-id={id}
-      xPosition={xPosition}
-      yPosition={yPosition}
+      horizontalPosition={horizontalPosition}
+      verticalPosition={verticalPosition}
       visible={on}
       {...props}
     >
@@ -59,7 +59,8 @@ const Tooltip = ({
 };
 
 Tooltip.propTypes = {
-  yPosition: PropTypes.oneOf(['top', 'bottom']),
+  horizontalPosition: PropTypes.oneOf(['rightEnd', 'leftEnd']),
+  verticalPosition: PropTypes.oneOf(['top', 'bottom']),
   id: PropTypes.number,
   src: PropTypes.string,
   title: PropTypes.string,
@@ -70,7 +71,8 @@ Tooltip.propTypes = {
 };
 
 Tooltip.defaultProps = {
-  yPposition: 'bottom',
+  horizontalPosition: 'leftEnd',
+  verticalPosition: 'bottom',
   id: null,
   src: '',
   title: 'title',
@@ -93,16 +95,21 @@ const TooltipContainer = styled.span`
   background-color: #fff;
   cursor: pointer;
   box-sizing: border-box;
-  left: ${({ xPosition }) => (xPosition === 'rightEnd' ? '-160px' : '-30px')};
-  top: ${({ yPosition }) => (yPosition === 'bottom' ? '38px' : '-96px')};
+  left: ${({ horizontalPosition }) =>
+    horizontalPosition === 'rightEnd' ? '-160px' : '-30px'};
+  top: ${({ verticalPosition }) =>
+    verticalPosition === 'bottom' ? '38px' : '-96px'};
 
   &::before {
     content: '';
     position: absolute;
-    top: ${({ yPosition }) => (yPosition === 'bottom' ? '-8px' : 'unset')};
-    left: ${({ xPosition }) => (xPosition === 'rightEnd' ? '170px' : '40px')};
+    top: ${({ verticalPosition }) =>
+      verticalPosition === 'bottom' ? '-8px' : 'unset'};
+    left: ${({ horizontalPosition }) =>
+      horizontalPosition === 'rightEnd' ? '170px' : '40px'};
     bottom: -8px;
-    transform: ${({ yPosition }) => yPosition === 'top' && `rotate(180deg)`};
+    transform: ${({ verticalPosition }) =>
+      verticalPosition === 'top' && `rotate(180deg)`};
     width: 12px;
     height: 8px;
     background-image: url(${pointImage});

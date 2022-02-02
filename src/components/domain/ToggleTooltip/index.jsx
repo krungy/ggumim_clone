@@ -1,12 +1,14 @@
 import { Toggle, Tooltip } from '@components/base';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
-const ToggleTooltip = ({ info, on, ...props }) => {
+const ToggleTooltip = ({ contentObject, ratioSize, on, ...props }) => {
   const convertPosition = {
-    x: info.pointX * 1.6,
-    y: info.pointY * 1.65,
-    yPosition: (info.pointX * 1.6) / 998 >= 0.5 ? 'top' : 'bottom',
-    xPosition: info.pointY > 250 ? 'rightEnd' : 'leftEnd',
+    x: (contentObject.pointX * 1.6) / ratioSize.widthRatio,
+    y: (contentObject.pointY * 1.65) / ratioSize.heightRatio,
+    horizontalPosition: contentObject.pointY > 250 ? 'rightEnd' : 'leftEnd',
+    verticalPosition:
+      (contentObject.pointX * 1.6) / 998 >= 0.5 ? 'top' : 'bottom',
   };
 
   return (
@@ -15,20 +17,36 @@ const ToggleTooltip = ({ info, on, ...props }) => {
       y={convertPosition.y}
       {...props}
     >
-      <Toggle id={info.productId} name={info.productName} on={on} />
+      <Toggle
+        id={contentObject.productId}
+        name={contentObject.productName}
+        on={on}
+      />
       <Tooltip
-        xPosition={convertPosition.xPosition}
-        yPosition={convertPosition.yPosition}
-        id={info.productId}
-        src={info.imageUrl}
-        title={info.productName}
-        outside={info.outside}
-        discount={`${info.discountRate}%`}
-        price={info.priceDiscount.toLocaleString()}
+        horizontalPosition={convertPosition.horizontalPosition}
+        verticalPosition={convertPosition.verticalPosition}
+        id={contentObject.productId}
+        src={contentObject.imageUrl}
+        title={contentObject.productName}
+        outside={contentObject.outside}
+        discount={`${contentObject.discountRate}%`}
+        price={contentObject.priceDiscount.toLocaleString()}
         on={on}
       />
     </ToggleTooltipContainer>
   );
+};
+
+ToggleTooltip.propTypes = {
+  contentObject: PropTypes.object,
+  ratioSize: PropTypes.object,
+  on: PropTypes.bool,
+};
+
+ToggleTooltip.defaultProps = {
+  contentList: {},
+  ratioSize: {},
+  on: false,
 };
 
 const ToggleTooltipContainer = styled.div`
@@ -37,4 +55,5 @@ const ToggleTooltipContainer = styled.div`
   left: ${({ y }) => y}px;
   top: ${({ x }) => x}px;
 `;
+
 export default ToggleTooltip;
