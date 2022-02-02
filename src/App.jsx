@@ -30,10 +30,10 @@ const App = () => {
   const handleOnClick = useCallback(
     (e) => {
       e.preventDefault();
-      if (!e.target.dataset.id || e.target.tagName === 'SPAN') {
+      if (!e.target.dataset.id || e.target.tagName !== 'SPAN') {
         removeProduct();
       }
-      if (selectedProduct && e.target.dataset.id !== selectedProduct) {
+      if (e.target.dataset.id !== selectedProduct) {
         selectProduct(e.target.dataset.id);
       }
     },
