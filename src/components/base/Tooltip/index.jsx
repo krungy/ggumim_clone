@@ -3,6 +3,7 @@ import pointImage from '@assets/image/tooltip.png';
 import { Image } from '@components/base';
 import next from '@assets/image/next.png';
 import PropTypes from 'prop-types';
+import color from '@assets/colors';
 
 const Tooltip = ({
   horizontalPosition,
@@ -17,12 +18,12 @@ const Tooltip = ({
   ...props
 }) => {
   const discountStyle = {
-    color: '#ff585d',
+    color: color.red,
   };
 
   const stocklessStyle = {
     fontSize: 11,
-    color: '#898f94',
+    color: color.grey,
   };
 
   return (
@@ -92,7 +93,7 @@ const TooltipContainer = styled.span`
   border-radius: 7px;
   box-shadow: 3px 3px 8px 0 rgb(0 0 0 / 20%);
   font-size: 14px;
-  background-color: #fff;
+  background-color: ${color.white};
   cursor: pointer;
   box-sizing: border-box;
   left: ${({ horizontalPosition }) =>

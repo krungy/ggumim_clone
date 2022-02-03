@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Image } from '@components/base';
 import discountBadge from '@assets/image/discountBadge.png';
 import { PropTypes } from 'prop-types';
+import color from '@assets/colors';
 
 const ProductItem = ({ src, productId, on, discount, size, ...props }) => {
   const imageStyle = {
@@ -73,7 +74,7 @@ const ProductItemContainer = styled.div`
 
 const ImageContainer = styled.div`
   position: relative;
-  border: 0.5px solid #aaafb9;
+  border: 0.5px solid ${color.border};
   border-radius: 16px;
   overflow: hidden;
   box-sizing: border-box;
@@ -93,7 +94,7 @@ const BadgeContainer = styled.div`
     right: ${({ discountPosition }) =>
       discountPosition === 'center' ? '4px' : '1px'};
     font-size: 11px;
-    color: #fff;
+    color: ${color.white};
     font-weight: 700;
     line-height: 25px;
     text-align: center;
