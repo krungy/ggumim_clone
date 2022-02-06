@@ -77,7 +77,6 @@
 ├── index.jsx
 ├── reportWebVitals.js
 ├── setupTests.js
-├── styles
-│   └── ResetStyle.jsx
-└── tree.txt
+└── styles
+    └── ResetStyle.jsx
 ```
