@@ -28,6 +28,8 @@
 ## 🧰 기술 스택 및 구현 사항
 ![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=styled-components&logoColor=white) 
 
+<br>
+
 ## 📚 전체 구현사항
 - [x] 사진과 가구에 대한 정보는 API를 통해서 호출
 - [x] 가구 정보가 있는 곳에 돋보기 모양의 버튼을 표시
