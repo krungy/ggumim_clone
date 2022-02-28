@@ -26,7 +26,7 @@
 <br>
 
 ## 🧰 기술 스택 및 구현 사항
-![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white) 
+![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E) ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![](https://img.shields.io/badge/emotion-DB7093?style=for-the-badge&logo=styled-components&logoColor=white) 
 
 ## 📚 전체 구현사항
 - [x] 사진과 가구에 대한 정보는 API를 통해서 호출
@@ -42,41 +42,20 @@
 
 ```bash
 .
-├── App.jsx
 ├── assets
 │   ├── colors
-│   │   └── index.jsx
 │   └── image
-│       ├── close.png
-│       ├── discountBadge.png
-│       ├── next.png
-│       ├── search.png
-│       └── tooltip.png
 ├── common
 │   └── api
-│       └── api.jsx
 ├── components
 │   ├── base
 │   │   ├── Image
-│   │   │   └── index.jsx
 │   │   ├── ProductItem
-│   │   │   └── index.jsx
 │   │   ├── Toggle
-│   │   │   └── index.jsx
-│   │   ├── Tooltip
-│   │   │   └── index.jsx
-│   │   └── index.js
+│   │   └── Tooltip
 │   └── domain
 │       ├── Carousel
-│       │   └── index.jsx
-│       ├── ToggleTooltip
-│       │   └── index.jsx
-│       └── index.js
+│       └── ToggleTooltip
 ├── context
-│   └── SelectProvider.js
-├── index.jsx
-├── reportWebVitals.js
-├── setupTests.js
 └── styles
-    └── ResetStyle.jsx
 ```
